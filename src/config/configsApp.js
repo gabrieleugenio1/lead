@@ -5,12 +5,13 @@ module.exports = function configsApp(express, app){
 
     // Imports Models
     const Lead = require('../models/Lead');
-
+    const User = require('../models/User');
+    
     // Rotas
     const routes = require('../routes');
     app.use('/v1', routes);
 
-    app.use((req,res,next) => {
+    app.use((req, res, next) => {
         res.redirect('/docs');
     })
 

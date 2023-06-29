@@ -13,15 +13,24 @@
   "paths": {
     "/leads": {
       "get": {
-        "description": "Lista todos os leads cadastrados.",
+        "tags": ["Leads"],
+        "summary": "Obter todos os leads",
+        "operationId": "obterLeads",
+        "description": "",
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       },
       "post": {
-        "description": "Insere um novo lead.",
+        "tags": ["Leads"],
+        "summary": "Criar um novo lead",
+        "operationId": "criarLead",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -47,7 +56,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created"
+            "description": "Criado"
           },
           "500": {
             "description": "Internal Server Error"
@@ -57,7 +66,10 @@
     },
     "/leads/{id}": {
       "get": {
-        "description": "Busca dados de um lead pelo ID.",
+        "tags": ["Leads"],
+        "summary": "Obter um lead pelo ID",
+        "operationId": "obterLeadPorId",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -73,7 +85,10 @@
         }
       },
       "put": {
-        "description": "Altera um lead.",
+        "tags": ["Leads"],
+        "summary": "Atualizar um lead",
+        "operationId": "atualizarLead",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -110,13 +125,19 @@
           "204": {
             "description": "No Content"
           },
+          "401": {
+            "description": "Não autorizado"
+          },
           "500": {
             "description": "Internal Server Error"
           }
         }
       },
       "delete": {
-        "description": "Deleta um lead.",
+        "tags": ["Leads"],
+        "summary": "Excluir um lead",
+        "operationId": "excluirLead",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -128,6 +149,199 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/user/": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Pegar todos os usuários",
+        "operationId": "allUsers",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Encontrar por id",
+        "operationId": "idUsers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Users"],
+        "summary": "Atualizar por id",
+        "operationId": "updateUsers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Users"],
+        "summary": "Deletar por id",
+        "operationId": "deleteUsers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Sair da conta",
+        "operationId": "logoutUsers",
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Criar novo usuário",
+        "operationId": "createUsers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "gabriel@gmail.com"
+                },
+                "password": {
+                  "example": "abcdef"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Criado"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Não autorizado"
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Login do usuário",
+        "operationId": "loginUsers",
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "gabriel@gmail.com"
+                },
+                "password": {
+                  "example": "abcdef"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Não autorizado"
           }
         }
       }
