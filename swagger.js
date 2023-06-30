@@ -6,7 +6,9 @@ const doc = {
         title: 'API LEADS',
         description: `API Node.js documentada com Swagger\n${process.env.API_URL}`,
     },
+    host: `${process.env.API_HOST}`,
     basePath: '/v1',
+    schemes: [`${process.env.API_HTTP}`],
 };
 
 const outputFile = './swagger_output.json';
